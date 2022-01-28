@@ -58,7 +58,6 @@ class UpdateBook(graphene.Mutation):
     def mutate(root, info, book_data=None):
         try:
             book_instance = Book.objects.get(pk=book_data.id)
-            print()
             if book_instance:
                 try:
                     book_instance.title = book_data.title
@@ -158,7 +157,6 @@ class Query(graphene.ObjectType):
     author_books = graphene.List(BookType, author_id=graphene.Int())
 
     def resolve_all_author(self, info, **kwargs):
-        print(info.context.user)
         try:
             return Author.objects.all()
         except Expression:
